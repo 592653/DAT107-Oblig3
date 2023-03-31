@@ -12,7 +12,7 @@ public class AnsattDAO {
 	private EntityManagerFactory emf;
 	
 	public AnsattDAO() {
-        emf = Persistence.createEntityManagerFactory("oblig3", BrukernavnPassord.getServerConfig());
+        emf = Persistence.createEntityManagerFactory("oblig3");
     }
 	
 	public Ansatt finnAnsattMedId(int id) {
