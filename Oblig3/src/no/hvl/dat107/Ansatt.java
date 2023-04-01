@@ -1,6 +1,6 @@
 package no.hvl.dat107;
 
-import java.util.Date;
+import java.time.LocalDate;
 //import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -17,13 +17,13 @@ public class Ansatt {
 	private String brukernavn;
 	private String fornavn;
 	private String etternavn;
-	private Date ansDato;
+	private LocalDate ansDato;
 	private String stilling;
 	private int mndlonn;
 
 	// private List<Ansatt> ansatt;
 	
-	public Ansatt(int ansattid, String brukernavn, String fornavn, String etternavn, Date ansDato, String stilling,
+	public Ansatt(int ansattid, String brukernavn, String fornavn, String etternavn, LocalDate ansDato, String stilling,
 			int mndlonn) {
 		this.ansattid = ansattid;
 		this.brukernavn = brukernavn;
@@ -69,11 +69,11 @@ public class Ansatt {
 		this.etternavn = etternavn;
 	}
 
-	public Date getAnsDato() {
+	public LocalDate getAnsDato() {
 		return ansDato;
 	}
 
-	public void setAnsDato(Date ansDato) {
+	public void setAnsDato(LocalDate ansDato) {
 		this.ansDato = ansDato;
 	}
 
