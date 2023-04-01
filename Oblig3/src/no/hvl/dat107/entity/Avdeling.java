@@ -1,21 +1,63 @@
 package no.hvl.dat107.entity;
 
-public class Avdeling {
+import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
-	public int avdelingid;
+@Entity
+@Table(schema = "oblig3", name = "Avdeling")
+public class Avdeling {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int avdelingId;
 	public String navn;
 	
-	public int getAvdelingid() {
-		return avdelingid;
+	//En avdeling må ha en sjef
+	@OneToOne (mappedBy="Avdeling")
+	private Ansatt sjef;
+//	private sjef som er ansatt
+	
+	@OneToMany(mappedBy="Avdeling")
+	private List<Ansatt> ansatt;
+	
+	//Tom konstruktør
+	public Avdeling() {
+		
 	}
-	public void setAvdelingid(int avdelingid) {
-		this.avdelingid = avdelingid;
+	//Kontruktøren
+	public Avdeling(int avdelingId, String navn, Ansatt sjef) {
+		this.avdelingId = avdelingId;
+		this.navn = navn;
+		this.sjef = sjef;
+	}
+	
+	public int getAvdelingId() {
+		return avdelingId;
+	}
+	public void setAvdelingId(int avdelingId) {
+		this.avdelingId = avdelingId;
 	}
 	public String getNavn() {
 		return navn;
 	}
 	public void setNavn(String navn) {
 		this.navn = navn;
+	}
+	public Ansatt getSjef() {
+		return sjef;
+	}
+	public void setSjef(Ansatt sjef) {
+		this.sjef = sjef;
+	}
+	@Override
+	public String toString() {
+		return "Avdeling [avdelingId=" + avdelingId + ", navn=" + navn + ", sjef=" + sjef + "]";
 	}
 	
 }

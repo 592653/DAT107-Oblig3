@@ -1,12 +1,12 @@
---Lim dette inn i sql databsen og kjør det der for 
---å opprette tabellen ansatt
---Skal lage de andre tabellene etter hvert
+<!--Lim dette inn i sql databsen og kjør det der 
+for å opprette tabellen ansatt -->
+
 
 DROP SCHEMA IF EXISTS oblig3 CASCADE;
 CREATE SCHEMA oblig3;
 SET search_path TO oblig3;
     
-CREATE TABLE ansatt
+CREATE TABLE Ansatt
 (
 	ansattid SERIAL UNIQUE PRIMARY KEY,
 	brukernavn VARCHAR(4) UNIQUE,
@@ -68,7 +68,7 @@ VALUES
 ALTER TABLE Avdeling
 ADD FOREIGN KEY(Sjef) REFERENCES Ansatt(Id);
 	
-
+<!-- UPDATE sjefen til avdelingen -->
 
 
 

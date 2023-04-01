@@ -4,7 +4,7 @@ import no.hvl.dat107.entity.Avdeling;
 
 public class AvdelingDAO {
 
-	public Avdeling finnAvdelingMedId(int id ) {
+	public Avdeling finnAvdelingMedId(int avdelingId) {
 		
 	}
 }

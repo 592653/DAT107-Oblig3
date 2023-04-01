@@ -21,12 +21,12 @@ public class AnsattDAO {
         emf = Persistence.createEntityManagerFactory("oblig3");
     }
 	
-	public Ansatt finnAnsattMedId(int id) {
+	public Ansatt finnAnsattMedId(int ansattid) {
         EntityManager em = emf.createEntityManager();
         Ansatt ansatt = null;
         
         try {
-        	ansatt = em.find(Ansatt.class, id);
+        	ansatt = em.find(Ansatt.class, ansattid);
         	
         } finally {
             em.close();
