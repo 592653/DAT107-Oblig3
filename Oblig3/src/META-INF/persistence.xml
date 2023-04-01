@@ -15,9 +15,9 @@
         <properties>
             <!--    Generelle JPA properties -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://ider-database.westeurope.cloudapp.azure.com:5432/h592653"/>
-            <property name="jakarta.persistence.jdbc.user" value="h592653"/>
-            <property name="jakarta.persistence.jdbc.password" value="5647Baldersheim"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://ider-database.westeurope.cloudapp.azure.com:5432/brukernavnetditt"/>
+            <property name="jakarta.persistence.jdbc.user" value="brukernavnet ditt"/>
+            <property name="jakarta.persistence.jdbc.password" value="passordet ditt"/>
      
 
             <!--    EclipseLink properties -->

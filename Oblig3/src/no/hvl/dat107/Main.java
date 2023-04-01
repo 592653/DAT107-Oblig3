@@ -1,6 +1,9 @@
 package no.hvl.dat107;
 
 import java.util.Scanner;
+
+import no.hvl.dat107.dao.AnsattDAO;
+
 import java.util.List;
 
 public class Main extends AnsattDAO {

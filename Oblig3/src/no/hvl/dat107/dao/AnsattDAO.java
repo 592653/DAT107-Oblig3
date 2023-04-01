@@ -1,4 +1,4 @@
-package no.hvl.dat107;
+package no.hvl.dat107.dao;
 //Dette er en hjelpeklasse, DAO betyr Data Access Object
 //Slik vi får tilgang til databasen
 
@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import no.hvl.dat107.entity.Ansatt;
 
 public class AnsattDAO {
 	
