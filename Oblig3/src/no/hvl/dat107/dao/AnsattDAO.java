@@ -21,12 +21,11 @@ public class AnsattDAO {
         emf = Persistence.createEntityManagerFactory("oblig3");
     }
 	
-	public Ansatt finnAnsattMedId(int ansattid) {
-        EntityManager em = emf.createEntityManager();
-        Ansatt ansatt = null;
-        
+	public Ansatt finnAnsattMedId(int ansattId) {
+		EntityManager em = emf.createEntityManager();
+		Ansatt ansatt = null;
         try {
-        	ansatt = em.find(Ansatt.class, ansattid);
+        	ansatt = em.find(Ansatt.class, ansattId);
         	
         } finally {
             em.close();
@@ -48,44 +47,57 @@ public class AnsattDAO {
 		return ansatt;
 	}
     public List<Ansatt> hentAnsattliste() {
-    	String queryString = "SELECT a FROM Ansatt a";
+    	
 		EntityManager em = emf.createEntityManager();
-		List<Ansatt> list = null;
+		List<Ansatt> ansattListe = null;
 		
 		try {
+			String queryString = "SELECT a FROM Ansatt a";
 			TypedQuery<Ansatt> query = em.createQuery(queryString, Ansatt.class);
-			list = query.getResultList();
-		} catch (Exception e) {
-			e.printStackTrace();
+			ansattListe = query.getResultList();
+			for (Ansatt a : ansattListe) {
+				System.out.println(a.toString());
+		    }
+	
 		} finally {
 			em.close();
 		}
-
-		return list;
-   
+		return ansattListe;
     }
-    public void OppdaterAnsatt(String fornavn, String etternavn, String brukernavn, LocalDate ansDato, String stilling, int mndlonn) {
-    	EntityManager em = emf.createEntityManager();
+    
+    public void leggTil(Ansatt leggTil) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		try {
+            tx.begin();
+            em.persist(leggTil);
+            tx.commit();
+        
+        } catch (Throwable e) {
+            e.printStackTrace();
+            tx.rollback();
+        } finally {
+            em.close();
+        }
+	}
+
+	public void oppdaterStilling (String stilling, int ansattId) {
+		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
         try {
-           Ansatt ansatt = em.find(Ansatt.class, ansattid);
+           Ansatt ansatt = em.find(Ansatt.class, ansattId);
            tx.begin();
            if (ansatt != null) {
         	   ansatt.setStilling(stilling);
-        	   ansatt.setAnsattid(ansattid);
-        	   ansatt.setAnsDato(ansDato);
-        	   ansatt.setBrukernavn(brukernavn);
-        	   ansatt.setEtternavn(etternavn);
-        	   ansatt.setFornavn(fornavn);
-        	   ansatt.setAnsDato(ansDato);
-        	   ansatt.setMndlønn(mndlonn);
-        	   ansatt.setStilling(stilling);
         	   em.merge(ansatt);
            }
+        } catch (Throwable e) {
+        	e.printStackTrace();
+            em.getTransaction().rollback();
         } finally {
         	em.close();
         }
-        
-    }
+	}
 }

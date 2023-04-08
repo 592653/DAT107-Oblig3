@@ -3,66 +3,96 @@ package no.hvl.dat107;
 import java.util.Scanner;
 
 import no.hvl.dat107.dao.AnsattDAO;
+import no.hvl.dat107.dao.AvdelingDAO;
+import no.hvl.dat107.entity.Ansatt;
+import no.hvl.dat107.entity.Avdeling;
+import no.hvl.dat107.entity.Prosjekt;
 
+import java.time.LocalDate;
 import java.util.List;
 
-public class Main extends AnsattDAO {
-	private static Scanner scanner = new Scanner(System.in);
-
-	// Lag et lite Main-program for å teste at alt er satt opp riktig.
-	// Hent f.eks. ut en ansatt og skriv ut på skjermen.
-	// (EntityManagerFactory, EntityManager, try, find(), finally, close).
+public class Main {
 
 	public static void main(String[] args) {
-		AnsattDAO ansattDAO = new AnsattDAO();
-//		String userInput = null;
-//		String userInput2 = null;
-//		userInput = scanner.nextLine();
-		leggTilAnsatt();
-	
-//        List<Ansatt> AlleAnsatt = ansattDAO.hentAnsattliste();    
-		System.out.println("Ansatt med id 2: \n" + ansattDAO.finnAnsattMedId(2));	
-		System.out.println("Ansatt med brukernavn Lyma: \n" + ansattDAO.finnBrukernavn("Lyma"));	
-		System.out.println("Liste over alle ansatte: \n" + ansattDAO.hentAnsattliste());
-	}
+		AnsattDAO ansattDao = new AnsattDAO();
+		AvdelingDAO avdelingDao = new AvdelingDAO();
+		Scanner sc = new Scanner(System.in);
+
+		String userInput, userInput2, brukernavn, navn, etternavn, stilling, sjef, rolle = null;
+		Integer mndlonn, avdelingId, ansattId, timer = null;
+		LocalDate dato = null;
+		boolean running = true;
+		boolean erSjef = false;
+		Ansatt ansatt = null;
+		Avdeling avdeling = null;
+		Prosjekt prosjekt = null; 
 		
-//			System.out.println("Skriv inn stilling");
-//			userInput2 = read.nextLine();
-//			ansattDAO.OppdaterStillingAnsatt(userInput2, Integer.parseInt(userInput));
-//			System.out.println("Stilling har blitt endret til: " + read);
-//			read.close();
-//		
-	private static void leggTilAnsatt() {
-		System.out.println("Vennligst skriv inn følgende informasjon: ");
-		System.out.print("Skriv inn Fornavn: ");
-		String fornavn = scanner.nextLine();
+		System.out.println("--------------------------------------------------------------------");
 
-		System.out.print("Skriv inn Etternavn: ");
-		String etternavn = scanner.nextLine();
-		
-		System.out.print("Skriv inn de 2 første bokstav i fornavnet ditt + 2 siste i etternavnet");
-		String brukernavn = scanner.nextLine();
+		while (running) {
+			System.out.println("A = Se liste over alle ansatte");
+			System.out.println("B = Søke etter ansatt med id");
+			System.out.println("C = Søke etter ansatt med brukernavn");
+			System.out.println("D = Oppdatere en stilling");
+			System.out.println("E = Søke etter alle ansatte ved en avdeling med id");
+			System.out.println("F = Avslutt spørringen");
 
-		System.out.print("Skriv inn ansettelsesdato: ");
-		String ansDato = scanner.nextLine();
+			userInput = sc.nextLine();
 
-		System.out.print("Skriv inn stilling: ");
-		String stilling = scanner.nextLine();
+			switch (userInput) {
+			case "A":
+				ansattDao.hentAnsattliste();
+				break;
 
-		System.out.print("Skriv inn månedslønn: ");
-		String mndlonn = scanner.nextLine();
-		int lonnint;
-		OppdaterAnsatt(fornavn, etternavn, brukernavn, ansDato, stilling, mndlonn);
-		try {
-			lonnint = Integer.parseInt(mndlonn);
-		} catch (NumberFormatException e) {
-			System.out.println(
-					"Input " + mndlonn + " inneholder andre ting enn tall, prøv igjen eller skriv '0' for å avslutte");
-			leggTilAnsatt();
-			return;
+			case "B":
+				System.out.println("Skriv inn ID til ansatt");
+				userInput = sc.nextLine();
+				ansatt = ansattDao.finnAnsattMedId(Integer.parseInt(userInput));
+
+				if (ansatt != null) {
+					System.out.println(ansatt.toString());
+				} else {
+					System.out.println("Finnes ikke");
+				}
+				break;
+
+			case "C":
+				System.out.println("Skriv inn brukernavn");
+				userInput = sc.nextLine();
+				ansatt = ansattDao.finnBrukernavn(userInput);
+				if (ansatt != null) {
+					System.out.println(ansatt.toString());
+				} else {
+					System.out.println("Finnes ikke");
+				}
+				break;
+
+			case "D":
+				System.out.println("Skriv inn id");
+				userInput = sc.nextLine();
+				ansatt = ansattDao.finnAnsattMedId(Integer.parseInt(userInput));
+				if (ansatt != null) {
+					System.out.println("Skriv inn stilling");
+					userInput2 = sc.nextLine();
+					ansattDao.oppdaterStilling(userInput2, Integer.parseInt(userInput));
+					System.out.println("Stilling har blitt endret til: " + userInput);
+				} else {
+					System.out.println("Finnes ikke");
+				}
+				break;
+				
+			case "E":
+				System.out.print("Skriv inn avdelingens id");
+				userInput = sc.nextLine();
+				avdelingDao.skrivUtAllePaAvd(Integer.parseInt(userInput));
+				break;
+				
+			case "FF":
+				System.out.println("Avsluttet");
+				System.out.println("--------------------------------------------------------------------");
+				running = false;
+				break;
+			}
 		}
-	
-		//scanner.close();
-	
 	}
 }

@@ -6,18 +6,17 @@
 
     <persistence-unit name="oblig3" transaction-type="RESOURCE_LOCAL">
   
-    
-        <class>no.hvl.dat107.Ansatt</class>
-        <class>no.hvl.dat107.Avdeling</class>
-         <class>no.hvl.dat107.Prosjekt</class>
-        
+        <class>no.hvl.dat107.entity.Ansatt</class>
+        <class>no.hvl.dat107.entity.Avdeling</class>
+         <class>no.hvl.dat107.entity.Prosjekt</class>
+         <class>no.hvl.dat107.entity.Prosjektdeltagelse</class> 
 
         <properties>
             <!--    Generelle JPA properties -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://ider-database.westeurope.cloudapp.azure.com:5432/brukernavnetditt"/>
-            <property name="jakarta.persistence.jdbc.user" value="brukernavnet ditt"/>
-            <property name="jakarta.persistence.jdbc.password" value="passordet ditt"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://ider-database.westeurope.cloudapp.azure.com:5432/Brukernavn"/>
+            <property name="jakarta.persistence.jdbc.user" value="BrukernavnetDitt"/>
+            <property name="jakarta.persistence.jdbc.password" value="Passordetditt"/>
      
 
             <!--    EclipseLink properties -->

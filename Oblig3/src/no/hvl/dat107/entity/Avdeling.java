@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -19,18 +20,14 @@ public class Avdeling {
 	public String navn;
 	
 	//En avdeling må ha en sjef
-	@OneToOne (mappedBy="Avdeling")
-	private Ansatt sjef;
-//	private sjef som er ansatt
+	@OneToOne
+	@JoinColumn(name = "sjef", referencedColumnName = "ansattId")
+	public Ansatt sjef;
 	
-	@OneToMany(mappedBy="Avdeling")
-	private List<Ansatt> ansatt;
 	
-	//Tom konstruktør
 	public Avdeling() {
 		
 	}
-	//Kontruktøren
 	public Avdeling(int avdelingId, String navn, Ansatt sjef) {
 		this.avdelingId = avdelingId;
 		this.navn = navn;
@@ -57,7 +54,7 @@ public class Avdeling {
 	}
 	@Override
 	public String toString() {
-		return "Avdeling [avdelingId=" + avdelingId + ", navn=" + navn + ", sjef=" + sjef + "]";
+		return "Avdeling [avdelingId = " + avdelingId + ", navn = " + navn + ", sjefId = " + sjef + "]";
 	}
 	
 }
