@@ -1,7 +1,10 @@
 package no.hvl.dat107.entity;
 
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +27,11 @@ public class Avdeling {
 	@JoinColumn(name = "sjef", referencedColumnName = "ansattId")
 	public Ansatt sjef;
 	
+	// en ansatt har en avdeling, en avdeling har mange ansatte
+    //@OneToMany(mappedBy = "avdeling", fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+	//	       orphanRemoval = true)
+    //@JoinColumn
+	private List<Ansatt> ansatte;
 	
 	public Avdeling() {
 		
@@ -51,6 +59,13 @@ public class Avdeling {
 	}
 	public void setSjef(Ansatt sjef) {
 		this.sjef = sjef;
+	}
+	
+	public List<Ansatt> getAnsatte() {
+		return ansatte;
+	}
+	public void setAnsatte(List<Ansatt> ansatte) {
+		this.ansatte = ansatte;
 	}
 	@Override
 	public String toString() {

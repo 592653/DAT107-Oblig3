@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -23,14 +25,13 @@ public class Ansatt{
 	private LocalDate ansdato;
 	private String stilling;
 	private int mndlonn;
-	//En ansatt må jobbe i en avdeling
-	//@OneToOne
-	private Integer avdelingId;
 	
-	
-	
+//	@ManyToOne //en ansatt har en avdeling, en avdeling har mange ansatte
+//	@JoinColumn(name = "avdelingId") //navnet på kolonnen i ansatt tabellen
+    private int avdelingId;
+//	
 	public Ansatt(int ansattId, String brukernavn, String fornavn, String etternavn, LocalDate ansDato, String stilling,
-			int mndlonn, Integer avdelingId) {
+			int mndlonn, int avdelingId) {
 		this.ansattId = ansattId;
 		this.brukernavn = brukernavn;
 		this.fornavn = fornavn;
@@ -100,22 +101,22 @@ public class Ansatt{
 		this.mndlonn = mndlønn;
 	}
 
-	public Integer getAvdelingId() {
+	public int getAvdelingId() {
 		return avdelingId;
 	}
-	public void setAvdelingId(Integer avdelingId) {
+	public void setAvdelingId(int avdelingId) {
 		this.avdelingId = avdelingId;
 	}
 	@Override
 	public String toString() {
 		return "Ansatt [ansattid = " + ansattId + ", brukernavn = " + brukernavn + ", fornavn = " + fornavn + ", etternavn = "
-				+ etternavn + ", ansettelsesdato = " + ansdato + ", stilling = " + stilling + ", maanedslonn = " + mndlonn
+				+ etternavn + ", ansettelsesdato = " + ansdato + ", stilling = " + stilling + ", maanedslonn = " + mndlonn + ", avdeling =" + avdelingId
 				+ "]";
 	}
 
 	public void skrivUt() {
 		System.out.println("AnsattID: " + ansattId + " BrukerNavn: " +brukernavn + " Fornavn: " + fornavn +" Etternavn: "+ etternavn 
-				+ " ansattelsesdato: " + ansdato +" Stilling: " + stilling + " Månedslønn: " + mndlonn + "\n");
+				+ " ansattelsesdato: " + ansdato +" Stilling: " + stilling + " Månedslønn: " + mndlonn + "Avdeling: " + avdelingId + "\n");
 	}
 
 }
