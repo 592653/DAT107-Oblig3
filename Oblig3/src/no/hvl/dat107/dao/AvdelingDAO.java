@@ -49,7 +49,7 @@ public class AvdelingDAO {
 
 	        List<Ansatt> ansatte = null;
 	        try {
-	            String queryString = "SELECT p FROM Ansatt p ORDER BY p.ansattId";
+	            String queryString = "SELECT p FROM ansatt p ORDER BY p.ansattId";
 	            TypedQuery<Ansatt> query = em.createQuery(queryString, Ansatt.class);
 	            ansatte = query.getResultList();
 	            for (Ansatt p : ansatte) {

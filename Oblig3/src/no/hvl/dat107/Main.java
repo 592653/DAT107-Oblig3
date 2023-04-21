@@ -31,8 +31,8 @@ public class Main {
 			System.out.println("C = Søke etter ansatt med brukernavn");
 			System.out.println("D = Oppdatere en stilling");
 			System.out.println("E = Søke etter avdeling med id");
-			//System.out.println("F = Se liste over alle på en avdeling");
-			System.out.println("F = Avslutt spørringen");
+			System.out.println("F = Se liste over alle på en avdeling");
+			System.out.println("G = Avslutt spørringen");
 			
 
 			userInput = sc.nextLine();
@@ -86,20 +86,23 @@ public class Main {
 
 				break;
 				
-//			case "F":
-//				//Funker ikkje
-//				System.out.print("Skriv inn avdelingens id ");
-//				userInput = sc.nextLine();
-//				avdelingDao.skrivUtAllePaAvd(Integer.parseInt(userInput));
-//				break;
+      		case "F":
+				//Funker ikkje
+				System.out.print("Skriv inn avdelingens id ");
+				userInput = sc.nextLine();
+				avdelingDao.skrivUtAllePaAvd(Integer.parseInt(userInput));
+				break;
 		
-			case "F":
+			case "G":
 				System.out.println("Avsluttet");
 				System.out.println("--------------------------------------------------------------------");
 				running = false;
 				sc.close();
 				break;
+				default:
+					break;
 			}
+			
 		}
 	}
 }

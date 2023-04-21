@@ -26,7 +26,9 @@ public class AnsattDAO {
 		Ansatt ansatt = null;
         try {
         	ansatt = em.find(Ansatt.class, ansattId);
-        	
+        	if(ansatt == null) {
+				System.out.print("Finner ikkje ansatt med den id-en, prøv på nytt: ");
+			}
         } finally {
             em.close();
         }
@@ -35,12 +37,16 @@ public class AnsattDAO {
 	public Ansatt finnBrukernavn(String brukernavn) {
 		Ansatt ansatt = null;
 		EntityManager em = emf.createEntityManager();
-		String query = "SELECT a FROM Ansatt a " + "WHERE a.brukernavn = :brukernavn";
+		String query = "SELECT a FROM ansatt a " + "WHERE a.brukernavn = :brukernavn";
 		
 		try {
 			TypedQuery<Ansatt> queryString = em.createQuery(query, Ansatt.class);
 			queryString.setParameter("brukernavn", brukernavn);
 			ansatt = queryString.getSingleResult();
+			
+			if(ansatt == null) {
+				System.out.print("Finner ikkje brukernavnet, prøv igjen: ");
+			}
 		} finally {
 			em.close();
 		}
@@ -52,7 +58,7 @@ public class AnsattDAO {
 		List<Ansatt> ansattListe = null;
 		
 		try {
-			String queryString = "SELECT a FROM Ansatt a";
+			String queryString = "SELECT a FROM ansatt a";
 			TypedQuery<Ansatt> query = em.createQuery(queryString, Ansatt.class);
 			ansattListe = query.getResultList();
 			for (Ansatt a : ansattListe) {

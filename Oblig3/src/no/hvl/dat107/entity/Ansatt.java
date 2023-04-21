@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
-@Entity
+@Entity(name = "ansatt")
 @Table(schema = "oblig3", name = "ansatt")
 public class Ansatt{
 
@@ -26,12 +26,12 @@ public class Ansatt{
 	private String stilling;
 	private int mndlonn;
 	
-//	@ManyToOne //en ansatt har en avdeling, en avdeling har mange ansatte
-//	@JoinColumn(name = "avdelingId") //navnet på kolonnen i ansatt tabellen
-    private int avdelingId;
+	@ManyToOne //en ansatt har en avdeling, en avdeling har mange ansatte
+	@JoinColumn(name = "avdelingId") //navnet på kolonnen i ansatt tabellen
+    private Avdeling avdelingId;
 //	
 	public Ansatt(int ansattId, String brukernavn, String fornavn, String etternavn, LocalDate ansDato, String stilling,
-			int mndlonn, int avdelingId) {
+			int mndlonn, Avdeling avdelingId) {
 		this.ansattId = ansattId;
 		this.brukernavn = brukernavn;
 		this.fornavn = fornavn;
@@ -101,17 +101,17 @@ public class Ansatt{
 		this.mndlonn = mndlønn;
 	}
 
-	public int getAvdelingId() {
+	public Avdeling getAvdelingId() {
 		return avdelingId;
 	}
-	public void setAvdelingId(int avdelingId) {
+	public void setAvdelingId(Avdeling avdelingId) {
 		this.avdelingId = avdelingId;
 	}
 	@Override
 	public String toString() {
 		return "Ansatt [ansattid = " + ansattId + ", brukernavn = " + brukernavn + ", fornavn = " + fornavn + ", etternavn = "
-				+ etternavn + ", ansettelsesdato = " + ansdato + ", stilling = " + stilling + ", maanedslonn = " + mndlonn + ", avdeling =" + avdelingId
-				+ "]";
+				+ etternavn + ", ansettelsesdato = " + ansdato + ", stilling = " + stilling + ", maanedslonn = " + mndlonn 
+				+ "Avdelingsnavn " + avdelingId.getNavn() +" ]";
 	}
 
 	public void skrivUt() {

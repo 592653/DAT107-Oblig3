@@ -69,14 +69,14 @@ INSERT INTO
 	avdeling(navn, sjef)
 VALUES
 	('IT-avdeling', 1),
-	('Markedsføring-avdeling', 2),
+	('Markedsforing-avdeling', 2),
 	('HR-avdeling', 3);
 
 INSERT INTO 
 	prosjekt(navn, beskrivelse)
 VALUES
 	('Project X', 'Veldig hemmelig'),
-	('Database JPA', 'Veldig gøy'),
+	('Database JPA', 'Veldig kjekt'),
 	('Katt', 'Koselig');
 
 INSERT INTO ProsjektDeltaker(ansattId, prosjektId, rolle, timer)

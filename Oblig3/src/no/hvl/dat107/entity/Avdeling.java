@@ -24,13 +24,11 @@ public class Avdeling {
 	
 	//En avdeling må ha en sjef
 	@OneToOne
-	@JoinColumn(name = "sjef", referencedColumnName = "ansattId")
+	@JoinColumn(name = "sjef")
 	public Ansatt sjef;
 	
 	// en ansatt har en avdeling, en avdeling har mange ansatte
-    //@OneToMany(mappedBy = "avdeling", fetch = FetchType.EAGER, cascade = CascadeType.ALL,
-	//	       orphanRemoval = true)
-    //@JoinColumn
+    @OneToMany(mappedBy = "avdelingId")
 	private List<Ansatt> ansatte;
 	
 	public Avdeling() {
